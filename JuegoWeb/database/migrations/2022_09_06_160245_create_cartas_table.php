@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cartas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->integer('numero');
+            $table->char('paquete');
+            $table->char('nombre');
             $table->timestamps();
         });
     }
