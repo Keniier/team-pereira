@@ -12,7 +12,7 @@
 
             <title>Match Battle</title>
         </head>
-    <body>
+    <body class="gradient-custom">
 
         <div id="app">
             <div class="main-wrapper main-wrapper-1">

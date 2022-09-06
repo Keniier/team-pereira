@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '')
+@section('title', 'Crear')
 
 @section('content')
     <section class="vh-100 gradient-custom">
@@ -15,11 +15,11 @@
                                     <h2>Match Battle</h2>
                                     <h6>Para crear una sala</h6>
                                 </div>
-                                <form method="post" action="{{ url('/crear-sala') }}">
+                                <form method="post" action="{{ url('/crear-sala/') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="nombre">Nombre Jugador</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="emailHelp" placeholder="Ingresa tu nombre">
+                                        <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="emailHelp" placeholder="Ingresa tu nombre" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Crear sala</button>
                                 </form>

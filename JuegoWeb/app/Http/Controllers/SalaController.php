@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sala;
+use App\Models\SalaJugadores;
 use Illuminate\Http\Request;
 
 class SalaController extends Controller
@@ -35,31 +36,35 @@ class SalaController extends Controller
      */
     public function store(Request $request)
     {
-        function randomHex() {
-            $chars = 'ABCDEF0123456789';
-            $color = '';
-            for ( $i = 0; $i < 6; $i++ ) {
-               $color .= $chars[rand(0, strlen($chars) - 1)];
-            }
-            return $color;
-         }
-         $sala_nueva = randomHex();
-         return $sala_nueva;
+        // // funcion para crear codigo de la sala
+        // function randomHex() {
+        //     $chars = 'ABCDEF0123456789';
+        //     $codigo = '';
+        //     for ( $i = 0; $i < 6; $i++ ) {
+        //        $codigo .= $chars[rand(0, strlen($chars) - 1)];
+        //     }
+        //     return strval($codigo);
+        //  }
 
-
-
+        // //  validacion de nombre de usuario
         // $this->validate($request, [
         //     'nombre' => 'required'
         // ]);
+        // $codigo = randomHex();
 
+        // // crear registro de la sala
         // $nueva_sala = new Sala();
-        // $nueva_sala->codigo = ;
+        // $nueva_sala->codigo_sala = $codigo;
         // $nueva_sala->save();
+        // $sala = Sala::where('codigo_sala', $codigo)->get();
 
+        // // crear registro de jugador salaa
+        // $jugador_sala = new SalaJugadores();
+        // $jugador_sala->codigo_sala_fk = $sala[0]->id;
+        // $jugador_sala->nombre_jugador = $request->nombre;
+        // $jugador_sala->save();
 
-
-        // return redirect()->route('usuarios.index');
-
+        return view('juego.index');
     }
 
     /**

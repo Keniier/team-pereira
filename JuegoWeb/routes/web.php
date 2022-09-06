@@ -20,7 +20,7 @@ Route::get('/crear', [Home::class, 'crear']);
 Route::get('/ingresar', [Home::class, 'ingresar']);
 
 // esta ruta permite ingresar
-Route::resource('entrar-sala', PhotoController::class);
+// Route::resource('entrar-sala', PhotoController::class);
 
 // esta ruta permite crear una nueva sala
 Route::resource('crear-sala', SalaController::class);

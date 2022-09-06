@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '')
+@section('title', 'Ingresar')
 
 @section('content')
     <section class="vh-100 gradient-custom">
