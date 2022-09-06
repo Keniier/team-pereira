@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sala;
 use Illuminate\Http\Request;
 
-class SalaController extends Controller
+class Home extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,17 @@ class SalaController extends Controller
      */
     public function index()
     {
-        //
+        return view('inicio.inicio');
+    }
+
+    public function crear()
+    {
+        return view('inicio.crear_sala');
+    }
+
+    public function ingresar()
+    {
+        return view('inicio.ingresar');
     }
 
     /**
@@ -35,40 +44,16 @@ class SalaController extends Controller
      */
     public function store(Request $request)
     {
-        function randomHex() {
-            $chars = 'ABCDEF0123456789';
-            $color = '';
-            for ( $i = 0; $i < 6; $i++ ) {
-               $color .= $chars[rand(0, strlen($chars) - 1)];
-            }
-            return $color;
-         }
-         $sala_nueva = randomHex();
-         return $sala_nueva;
-
-
-
-        // $this->validate($request, [
-        //     'nombre' => 'required'
-        // ]);
-
-        // $nueva_sala = new Sala();
-        // $nueva_sala->codigo = ;
-        // $nueva_sala->save();
-
-
-
-        // return redirect()->route('usuarios.index');
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sala  $sala
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Sala $sala)
+    public function show($id)
     {
         //
     }
@@ -76,10 +61,10 @@ class SalaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sala  $sala
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sala $sala)
+    public function edit($id)
     {
         //
     }
@@ -88,10 +73,10 @@ class SalaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sala  $sala
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sala $sala)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -99,10 +84,10 @@ class SalaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sala  $sala
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sala $sala)
+    public function destroy($id)
     {
         //
     }

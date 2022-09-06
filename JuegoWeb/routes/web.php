@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Home;
+use App\Http\Controllers\SalaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Home::class, 'index']);
+Route::get('/crear', [Home::class, 'crear']);
+Route::get('/ingresar', [Home::class, 'ingresar']);
+
+// esta ruta permite ingresar
+Route::resource('entrar-sala', PhotoController::class);
+
+// esta ruta permite crear una nueva sala
+Route::resource('crear-sala', SalaController::class);
