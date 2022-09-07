@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('sala_jugadores', function (Blueprint $table) {
             $table->id('id');
-            $table->bigInteger('codigo_sala_fk')->unsigned();
+            $table->string('codigo_sala');
             $table->string('nombre_jugador');
-            $table->foreign('codigo_sala_fk')->references('id')->on('salas');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Home;
 use App\Http\Controllers\SalaController;
+use App\Http\Controllers\SalaJugadoresController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,8 @@ Route::get('/ingresar', [Home::class, 'ingresar']);
 
 
 // esta ruta permite crear una nueva sala
-Route::post('/crear-sala', [SalaController::class, 'crear_sala']);
+Route::post('/crear-sala', [SalaJugadoresController::class, 'crear_sala']);
 // esta ruta permite ingresar
-Route::post('/entrar-sala', [SalaController::class, 'entrar_sala']);
+Route::post('/entrar-sala', [SalaJugadoresController::class, 'entrar_sala']);
+// ruta para inciar juego
+Route::post('/iniciar-juego', [SalaJugadoresController::class, 'iniciar_juego']);

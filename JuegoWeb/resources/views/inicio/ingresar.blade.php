@@ -19,11 +19,11 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nombre">Nombre Jugador</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu Nombre">
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu Nombre" required>
                             </div>
                             <div class="form-group">
                                 <label for="cod_sala">Codigo de sala</label>
-                                <input type="text" class="form-control" id="cod_sala" name="cod_sala" placeholder="Codigo">
+                                <input type="text" class="form-control" id="cod_sala" name="cod_sala" placeholder="Codigo" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Ingresar</button>
                         </form>
