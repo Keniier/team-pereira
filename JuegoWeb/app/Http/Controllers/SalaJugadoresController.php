@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cartas;
+use App\Models\JugadoresCartas;
 use App\Models\SalaJugadores;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SalaJugadoresController extends Controller
 {
@@ -19,7 +22,7 @@ class SalaJugadoresController extends Controller
             return strval($codigo);
          }
 
-        //  validacion de nombre de usuario
+        // validacion de nombre de usuario
         $this->validate($request, [
             'nombre' => 'required'
         ]);
@@ -31,7 +34,9 @@ class SalaJugadoresController extends Controller
         $nueva_sala->nombre_jugador = $request->nombre;
         $nueva_sala->save();
 
-        return view('juego.index', compact(['codigo']));
+        $id_jugador = SalaJugadores::where('codigo_sala', $codigo)->where('nombre_jugador', $request->nombre);
+
+        return redirect('/sala-juego/'.$codigo.'/'.$id_jugador);
     }
 
     public function entrar_sala(Request $request)
@@ -51,7 +56,7 @@ class SalaJugadoresController extends Controller
             $jugador_sala->save();
 
             $jugadores = SalaJugadores::where('codigo_sala', $codigo)->get();
-            return view('juego.index', compact(['codigo', 'jugadores']));
+            return redirect('/sala-juego/'.$codigo);
         }else{
             return view('inicio.ingresar');
         }
@@ -61,24 +66,52 @@ class SalaJugadoresController extends Controller
 
     public function iniciar_juego (Request $request)
     {
+        // consultar cunatos jugadores hay
         $codigo_sala = $request->codigo;
         $cant_jugadores = SalaJugadores::where('codigo_sala', $codigo_sala)->count();
+        $datos_jugador_sala = SalaJugadores::where('codigo_sala', $codigo_sala)->get();
 
+        // cantidad iguales a reprtir
         $repartir = 32 / $cant_jugadores;
-
         $repartir = round($repartir);
-        for ($i=0; $i < $repartir; $i++) {
 
-            $rand = range(1, 32);
-            shuffle($rand);
-            foreach ($rand as $val) {
-                echo $val . "\n";
+        //generar numeros random "revolver las cartas"
+        $cartas_random = array();
+
+        // random sin repetir cartas
+        $rand = range(1, 32);
+        shuffle($rand);
+        foreach ($rand as $val) {
+            array_push($cartas_random, $val);
+        }
+
+        // dividir el cartas en la cantidad de jugadores
+        $cartas_random = array_chunk($cartas_random, $repartir);
+
+        // cada que inicie una partida las cartas se desasignan
+        DB::update('update cartas set id_sala_jugador_fk = null');
+
+        // ciclo de los jugadores
+        for ($i=0; $i < $cant_jugadores ; $i++) {
+            // ciclo de las cartas
+            for ($a=0; $a < $repartir; $a++) {
+                $carta = Cartas::where('id', $cartas_random[$i][$a])->get();
+                if ($carta[0]->id_sala_jugador_fk == null) {
+                    Cartas::where('id', $cartas_random[$i][$a])->update(['id_sala_jugador_fk' => $datos_jugador_sala[$i]->id]);
+                }
             }
-
         }
 
 
 
+
+    }
+
+    public function index_juego($codigo, $id_jugador)
+    {
+        $jugadores = SalaJugadores::where('codigo_sala', $codigo)->get();
+        $cartas = Cartas::where('id_sala_jugador_fk', $id_jugador)->get();
+        return view('juego.index', compact(['jugadores', 'codigo', 'cartas', 'id_jugador']));
     }
 
     /**

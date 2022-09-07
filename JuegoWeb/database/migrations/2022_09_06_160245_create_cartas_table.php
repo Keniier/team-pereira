@@ -18,7 +18,11 @@ return new class extends Migration
             $table->integer('numero');
             $table->char('paquete');
             $table->char('nombre');
+            $table->bigInteger('id_sala_jugador_fk')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('id_sala_jugador_fk')->references('id')->on('sala_jugadores');
+
+
         });
     }
 

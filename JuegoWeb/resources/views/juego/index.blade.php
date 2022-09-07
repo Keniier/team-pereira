@@ -4,19 +4,22 @@
 
 @section('content')
     <nav class="nav d-flex justify-content-around">
-        <li class="nav-item">
+        <li class="nav-item text-white my-2">
+            <h4>TIEMPO DE JUEGO <span>1:00:00</span></h4>
+        </li>
+        <li class="nav-item my-3">
             <form method="post" action="{{ url('/iniciar-juego') }}">
                 @csrf
                 <input type="hidden" name="codigo" value="{{$codigo}}">
-                <button type="submit" class="btn btn-success my-2">INICIAR JUEGO</button>
+                <button type="submit" class="btn btn-success">INICIAR JUEGO</button>
             </form>
         </li>
-        <li class="nav-item">
-            <h4>TIEMPO DE JUEGO <span>1:00:00</span></h4>
+        <li class="nav-item text-white my-3">
+            <h4>CODIGO DE SALA: <span>{{$codigo}}</span></h4>
         </li>
     </nav>
     <section class="vh-100 gradient-custom">
-        <div class="container py-5">
+        <div class="container py-3">
             <div class="row d-flex justify-content-around">
                 <div class="col-3">
                     {{-- jugador1 --}}
@@ -25,19 +28,18 @@
                             <h4 class="mx-auto">{{$jugadores[0]->nombre_jugador}}</h4>
                         </div>
                         {{-- condicionar si exiten cartas --}}
-                        {{-- @if ()
-
-                        @endif --}}
-                        <div class="card mb-2">
-                            <div class="card-header">
-                                A1
+                        @isset($cartas)
+                            <div class="card mb-2">
+                                <div class="card-header">
+                                    <img id="img" src="" alt="..." class="img-thumbnail" width="80px">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title" id="pais1" data-pais="{{$cartas[0]->nombre}}">{{$cartas[0]->nombre}}</h5>
+                                    <p class="card-text">Población: <span id="poblacion1" class="text-bold"></span> </p>
+                                    <p class="card-text">Area: <span id="area1"></span></p>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="pais1">{{}}</h5>
-                                <p class="card-text">Población: <span></span> </p>
-                                <p class="card-text">Area: <span></span> </p>
-                            </div>
-                        </div>
+                        @endisset
                     @endisset
                     {{-- jugador2 --}}
                     @isset($jugadores[2])
@@ -179,5 +181,5 @@
 
 @section('scripts')
     {{-- scripts --}}
-    <script src="js/juego.js"></script>
+    <script src="http://127.0.0.1:8000/js/juego.js"></script>
 @endsection

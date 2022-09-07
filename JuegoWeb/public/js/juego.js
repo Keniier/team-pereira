@@ -1,8 +1,11 @@
-fetch("https://restcountries.com/v3.1/name/colombia", {
+let carta_pais = document.getElementById('pais');
+console.log(carta_pais.dataset.pais);
+
+fetch("https://restcountries.com/v3.1/name/" + carta_pais.dataset.pais, {
 })
     .then((result) => result.json())
     .then((data) => {
-        carta(data);
+        cartaJugador1(data);
     });
 
 function carta(data){

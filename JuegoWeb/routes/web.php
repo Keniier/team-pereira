@@ -27,3 +27,7 @@ Route::post('/crear-sala', [SalaJugadoresController::class, 'crear_sala']);
 Route::post('/entrar-sala', [SalaJugadoresController::class, 'entrar_sala']);
 // ruta para inciar juego
 Route::post('/iniciar-juego', [SalaJugadoresController::class, 'iniciar_juego']);
+
+// ruta para la vista del juego
+Route::get('/sala-juego/{codigo}/{id_jugador}', [SalaJugadoresController::class, 'index_juego']);
+
