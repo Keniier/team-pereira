@@ -3,60 +3,56 @@
 @section('title', 'Sala de juego')
 
 @section('content')
+    <nav class="nav d-flex justify-content-around">
+        <li class="nav-item">
+            <button class="btn btn-success my-2">INICIAR JUEGO</button>
+        </li>
+        <li class="nav-item">
+            <h4>TIEMPO DE JUEGO</h4>
+            <h4>1:00:00</h4>
+        </li>
+    </nav>
     <section class="vh-100 gradient-custom">
         <div class="container py-5">
-            <div class="row d-flex justify-content-between">
-                <div class="card col-md-3" style="width: 15rem;">
-                    <h5 class="card-title">Nombre Jugador</h5>
-                    <img src="." class="card-img-top mb-3" alt="..." id="img1" height="30%">
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">Población: </li>
-                        <li class="list-group-item col" id="poblacion1"></li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">Area: </li>
-                        <li class="list-group-item col" id="area1"></li>
-                    </ul>
+            <div class="row d-flex justify-content-around">
+                <div class="col-3">
+                    <div class="d-flex justify-content-center">
+                        <h4 class="mx-auto">jugador</h4>
+                    </div>
+                    {{-- condicionar si exiten cartas --}}
+                    {{-- @if ()
+
+                    @endif --}}
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            A1
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="nombre">Colombia</h5>
+                            <p class="card-text" id="poblacion">Población: <span></span> </p>
+                            <p class="card-text" id="area">Area: <span></span> </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card col-md-3" style="width: 15rem;">
-                    <h5 class="card-title">Nombre Jugador</h5>
-                    <img src="" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="justify-content-center">
+                    <h1 id="ganador">GANADOR</h1>
+                </div>
+                <div class="col-3">
+                    <div class="d-flex justify-content-center">
+                        <h4>jugador</h4>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            A1
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="nombre">Colombia</h5>
+                            <p class="card-text" id="poblacion">Población: <span></span> </p>
+                            <p class="card-text" id="area">Area: <span></span> </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row d-flex justify-content-between">
-                <div class="card col-md-3" style="width: 15rem;">
-                    <h5 class="card-title">Nombre Jugador</h5>
-                    <img src="" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card col-md-3" style="width: 15rem;">
-                    <h5 class="card-title">Nombre Jugador</h5>
-                    <img src="" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-between">
-                <div class="card col-md-3" style="width: 15rem;">
-                    <h5 class="card-title">Nombre Jugador</h5>
-                    <img src="" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card col-md-3" style="width: 15rem;">
-                    <h5 class="card-title">Nombre Jugador</h5>
-                    <img src="" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

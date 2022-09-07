@@ -19,8 +19,8 @@ Route::get('/', [Home::class, 'index']);
 Route::get('/crear', [Home::class, 'crear']);
 Route::get('/ingresar', [Home::class, 'ingresar']);
 
-// esta ruta permite ingresar
-// Route::resource('entrar-sala', PhotoController::class);
 
 // esta ruta permite crear una nueva sala
-Route::resource('crear-sala', SalaController::class);
+Route::post('/crear-sala', [SalaController::class, 'crear_sala']);
+// esta ruta permite ingresar
+Route::post('/entrar-sala', [SalaController::class, 'entrar_sala']);

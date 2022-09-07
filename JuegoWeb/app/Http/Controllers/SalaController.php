@@ -34,7 +34,40 @@ class SalaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function crear_sala(Request $request)
+    {
+        // // funcion para crear codigo de la sala
+        // function randomHex() {
+        //     $chars = 'ABCDEF0123456789';
+        //     $codigo = '';
+        //     for ( $i = 0; $i < 6; $i++ ) {
+        //        $codigo .= $chars[rand(0, strlen($chars) - 1)];
+        //     }
+        //     return strval($codigo);
+        //  }
+
+        // //  validacion de nombre de usuario
+        // $this->validate($request, [
+        //     'nombre' => 'required'
+        // ]);
+        // $codigo = randomHex();
+
+        // // crear registro de la sala
+        // $nueva_sala = new Sala();
+        // $nueva_sala->codigo_sala = $codigo;
+        // $nueva_sala->save();
+        // $sala = Sala::where('codigo_sala', $codigo)->get();
+
+        // // crear registro de jugador salaa
+        // $jugador_sala = new SalaJugadores();
+        // $jugador_sala->codigo_sala_fk = $sala[0]->id;
+        // $jugador_sala->nombre_jugador = $request->nombre;
+        // $jugador_sala->save();
+
+        return view('juego.index');
+    }
+
+    public function entrar_sala(Request $request)
     {
         // // funcion para crear codigo de la sala
         // function randomHex() {
