@@ -34,9 +34,7 @@ class SalaJugadoresController extends Controller
         $nueva_sala->nombre_jugador = $request->nombre;
         $nueva_sala->save();
 
-        $id_jugador = SalaJugadores::where('codigo_sala', $codigo)->where('nombre_jugador', $request->nombre);
-
-        return redirect('/sala-juego/'.$codigo.'/'.$id_jugador);
+        return redirect('/sala-juego/'.$codigo);
     }
 
     public function entrar_sala(Request $request)
@@ -71,47 +69,65 @@ class SalaJugadoresController extends Controller
         $cant_jugadores = SalaJugadores::where('codigo_sala', $codigo_sala)->count();
         $datos_jugador_sala = SalaJugadores::where('codigo_sala', $codigo_sala)->get();
 
-        // cantidad iguales a reprtir
-        $repartir = 32 / $cant_jugadores;
-        $repartir = round($repartir);
 
-        //generar numeros random "revolver las cartas"
-        $cartas_random = array();
+        // condicion si hay mas de dos jugadores
+        if ($cant_jugadores >= 2) {
+            // cantidad iguales a reprtir
+            $repartir = 32 / $cant_jugadores;
+            $repartir = round($repartir);
 
-        // random sin repetir cartas
-        $rand = range(1, 32);
-        shuffle($rand);
-        foreach ($rand as $val) {
-            array_push($cartas_random, $val);
-        }
+            //generar numeros random "revolver las cartas"
+            $cartas_random = array();
 
-        // dividir el cartas en la cantidad de jugadores
-        $cartas_random = array_chunk($cartas_random, $repartir);
+            // random sin repetir cartas
+            $rand = range(1, 32);
+            shuffle($rand);
+            foreach ($rand as $val) {
+                array_push($cartas_random, $val);
+            }
 
-        // cada que inicie una partida las cartas se desasignan
-        DB::update('update cartas set id_sala_jugador_fk = null');
+            // dividir el cartas en la cantidad de jugadores
+            $cartas_random = array_chunk($cartas_random, $repartir);
 
-        // ciclo de los jugadores
-        for ($i=0; $i < $cant_jugadores ; $i++) {
-            // ciclo de las cartas
-            for ($a=0; $a < $repartir; $a++) {
-                $carta = Cartas::where('id', $cartas_random[$i][$a])->get();
-                if ($carta[0]->id_sala_jugador_fk == null) {
-                    Cartas::where('id', $cartas_random[$i][$a])->update(['id_sala_jugador_fk' => $datos_jugador_sala[$i]->id]);
+            // cada que inicie una partida las cartas se desasignan
+            DB::update('update cartas set id_sala_jugador_fk = null');
+
+            // rapartit o barajar cartas
+            // ciclo de los jugadores
+            for ($i=0; $i < $cant_jugadores ; $i++) {
+                // ciclo de las cartas
+                for ($a=0; $a < $repartir-1; $a++) {
+                    $carta = Cartas::where('id', $cartas_random[$i][$a])->get();
+                    if ($carta[0]->id_sala_jugador_fk == null) {
+                        Cartas::where('id', $cartas_random[$i][$a])->update(['id_sala_jugador_fk' => $datos_jugador_sala[$i]->id]);
+                    }
                 }
             }
+
+            return redirect('/jugando/'.$codigo_sala);
+        }else{
         }
-
-
+        return redirect('/sala-juego/'.$codigo_sala);
 
 
     }
 
-    public function index_juego($codigo, $id_jugador)
+    public function index_juego($codigo)
     {
-        $jugadores = SalaJugadores::where('codigo_sala', $codigo)->get();
-        $cartas = Cartas::where('id_sala_jugador_fk', $id_jugador)->get();
-        return view('juego.index', compact(['jugadores', 'codigo', 'cartas', 'id_jugador']));
+        $jugadores = DB::select('SELECT cartas.id, cartas.numero, cartas.paquete, cartas.nombre, sala_jugadores.nombre_jugador, sala_jugadores.codigo_sala, COUNT(cartas.id_sala_jugador_fk) AS cant FROM `cartas` INNER JOIN sala_jugadores ON cartas.id_sala_jugador_fk = sala_jugadores.id GROUP BY cartas.id_sala_jugador_fk');
+        return view('juego.index', compact(['jugadores', 'codigo']));
+    }
+
+    public function jugando($codigo)
+    {
+        $jugadores = DB::select('SELECT cartas.id, cartas.numero, cartas.paquete, cartas.nombre, sala_jugadores.nombre_jugador, sala_jugadores.codigo_sala, COUNT(cartas.id_sala_jugador_fk) AS cant FROM `cartas` INNER JOIN sala_jugadores ON cartas.id_sala_jugador_fk = sala_jugadores.id GROUP BY cartas.id_sala_jugador_fk');
+        return view('juego.index2', compact(['jugadores', 'codigo']));
+    }
+
+    public function ganador($codigo)
+    {
+        $jugadores = DB::select('SELECT sala_jugadores.nombre_jugador, sala_jugadores.codigo_sala, COUNT(cartas.id_sala_jugador_fk) AS cant FROM `cartas` INNER JOIN sala_jugadores ON cartas.id_sala_jugador_fk = sala_jugadores.id GROUP BY cartas.id_sala_jugador_fk');
+        return view('juego.index2', compact(['jugadores', 'codigo']));
     }
 
     /**

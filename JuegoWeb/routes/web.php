@@ -29,5 +29,10 @@ Route::post('/entrar-sala', [SalaJugadoresController::class, 'entrar_sala']);
 Route::post('/iniciar-juego', [SalaJugadoresController::class, 'iniciar_juego']);
 
 // ruta para la vista del juego
-Route::get('/sala-juego/{codigo}/{id_jugador}', [SalaJugadoresController::class, 'index_juego']);
+Route::get('/sala-juego/{codigo}', [SalaJugadoresController::class, 'index_juego']);
+
+// juego en ronda
+Route::get('/jugando/{codigo}', [SalaJugadoresController::class, 'jugando']);
+
+Route::get('/ganador/{codigo}', [SalaJugadoresController::class, 'ganador']);
 

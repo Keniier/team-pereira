@@ -11,7 +11,7 @@
             <form method="post" action="{{ url('/iniciar-juego') }}">
                 @csrf
                 <input type="hidden" name="codigo" value="{{$codigo}}">
-                <button type="submit" class="btn btn-success">INICIAR JUEGO</button>
+                <button type="submit" class="btn btn-success">EJECUTAR RONDA</button>
             </form>
         </li>
         <li class="nav-item text-white my-3">
@@ -28,18 +28,11 @@
                             <h4 class="mx-auto">{{$jugadores[0]->nombre_jugador}}</h4>
                         </div>
                         {{-- condicionar si exiten cartas --}}
-                        @isset($cartas)
-                            <div class="card mb-2">
-                                <div class="card-header">
-                                    <img id="img" src="" alt="..." class="img-thumbnail" width="80px">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title" id="pais1" data-pais="{{$cartas[0]->nombre}}">{{$cartas[0]->nombre}}</h5>
-                                    <p class="card-text">Población: <span id="poblacion1" class="text-bold"></span> </p>
-                                    <p class="card-text">Area: <span id="area1"></span></p>
-                                </div>
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                <h4>Total Cartas: {{$jugadores[0]->cant}}</h4>
                             </div>
-                        @endisset
+                        </div>
                     @endisset
                     {{-- jugador2 --}}
                     @isset($jugadores[2])
@@ -47,17 +40,9 @@
                             <h4 class="mx-auto">{{$jugadores[2]->nombre_jugador}}</h4>
                         </div>
                         {{-- condicionar si exiten cartas --}}
-                        {{-- @if ()
-
-                        @endif --}}
                         <div class="card mb-2">
                             <div class="card-header">
-                                A1
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="pais2">Colombia</h5>
-                                <p class="card-text">Población: <span></span> </p>
-                                <p class="card-text">Area: <span></span> </p>
+                                <h4>Total Cartas: {{$jugadores[2]->cant}}</h4>
                             </div>
                         </div>
                     @endisset
@@ -67,17 +52,9 @@
                             <h4 class="mx-auto">{{$jugadores[4]->nombre_jugador}}</h4>
                         </div>
                         {{-- condicionar si exiten cartas --}}
-                        {{-- @if ()
-
-                        @endif --}}
                         <div class="card mb-2">
                             <div class="card-header">
-                                A1
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="pais3">Colombia</h5>
-                                <p class="card-text">Población: <span></span> </p>
-                                <p class="card-text">Area: <span></span> </p>
+                                <h4>Total Cartas: {{$jugadores[4]->cant}}</h4>
                             </div>
                         </div>
                     @endisset
@@ -93,17 +70,9 @@
                             <h4 class="mx-auto">{{$jugadores[1]->nombre_jugador}}</h4>
                         </div>
                         {{-- condicionar si exiten cartas --}}
-                        {{-- @if ()
-
-                        @endif --}}
                         <div class="card mb-2">
                             <div class="card-header">
-                                A1
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="pais4">Colombia</h5>
-                                <p class="card-text">Población: <span></span> </p>
-                                <p class="card-text">Area: <span></span> </p>
+                                <h4>Total Cartas: {{$jugadores[1]->cant}}</h4>
                             </div>
                         </div>
                     @endisset
@@ -114,17 +83,9 @@
                             <h4 class="mx-auto">{{$jugadores[3]->nombre_jugador}}</h4>
                         </div>
                         {{-- condicionar si exiten cartas --}}
-                        {{-- @if ()
-
-                        @endif --}}
                         <div class="card mb-2">
                             <div class="card-header">
-                                A1
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="pais5">Colombia</h5>
-                                <p class="card-text">Población: <span></span> </p>
-                                <p class="card-text">Area: <span></span> </p>
+                                <h4>Total Cartas: {{$jugadores[3]->cant}}</h4>
                             </div>
                         </div>
                     @endisset
@@ -135,17 +96,9 @@
                             <h4 class="mx-auto">{{$jugadores[5]->nombre_jugador}}</h4>
                         </div>
                         {{-- condicionar si exiten cartas --}}
-                        {{-- @if ()
-
-                        @endif --}}
                         <div class="card mb-2">
                             <div class="card-header">
-                                A1
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="pais6">Colombia</h5>
-                                <p class="card-text">Población: <span></span> </p>
-                                <p class="card-text">Area: <span></span> </p>
+                                <h4>Total Cartas: {{$jugadores[5]->cant}}</h4>
                             </div>
                         </div>
                     @endisset
@@ -156,17 +109,9 @@
                             <h4 class="mx-auto">{{$jugadores[6]->nombre_jugador}}</h4>
                         </div>
                         {{-- condicionar si exiten cartas --}}
-                        {{-- @if ()
-
-                        @endif --}}
                         <div class="card mb-2">
                             <div class="card-header">
-                                A1
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="pais7">Colombia</h5>
-                                <p class="card-text">Población: <span></span> </p>
-                                <p class="card-text">Area: <span></span> </p>
+                                <h4>Total Cartas: {{$jugadores[6]->cant}}</h4>
                             </div>
                         </div>
                     @endisset
